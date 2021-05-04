@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"/>
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+      <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark mb-5">
+        <a class="navbar-brand" href="#">
+          <img
+            src="./assets/admin.png"
+            width="30"
+            height="30"
+            class="d-inline-block align-top"
+            alt=""
+          />
+          Admin
+        </a>
+
+        <div class="row">
+          <div class="col">
+            <p id="currentUser" class="text-uppercase text-white" style="width: 20rem;"></p>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-danger pull-left" onclick="Logout()">Cerrar Sesión</button>
+          </div>
+        </div>
+        
+      </nav>
+    
+      <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="vista-tab" data-toggle="tab" href="#vista" role="tab" aria-controls="vista" aria-selected="true">Vista Medicinas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="patient1-tab" data-toggle="tab" href="#patient1" role="tab" aria-controls="patient1" aria-selected="false">Vista Pacientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="doctor1-tab" data-toggle="tab" href="#doctor1" role="tab" aria-controls="doctor1" aria-selected="false">Vista Doctores</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nurse1-tab" data-toggle="tab" href="#nurse1" role="tab" aria-controls="nurse1" aria-selected="false">Vista Enfermeras</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="patient-tab" data-toggle="tab" href="#patient" role="tab" aria-controls="patient" aria-selected="false">Paciente</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="doctor-tab" data-toggle="tab" href="#doctor" role="tab" aria-controls="doctor" aria-selected="false">Médicos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="nurse-tab" data-toggle="tab" href="#nurse" role="tab" aria-controls="nurse" aria-selected="false">Enfermeras</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="medicament-tab" data-toggle="tab" href="#medicament" role="tab" aria-controls="medicament" aria-selected="false">Medicamentos</a>
+        </li>
+
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        
+        <div class="tab-pane fade show active" id="vista" role="tabpanel" aria-labelledby="vista-tab">
+                <button type="submit" class="btn btn-dark btn-block mt-3" id="genReportMedicine">Generar Reporte</button>
+          <div class="d-flex flex-column" id="medicines">
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="patient1" role="tabpanel" aria-labelledby="patient1-tab">
+                <button type="submit" class="btn btn-dark btn-block mt-3" id="genReportPatient">Generar Reporte</button>
+          <div class="d-flex flex-column" id="patients"></div>
+        </div>
+
+        <div class="tab-pane fade" id="doctor1" role="tabpanel" aria-labelledby="doctor1-tab">
+                <button type="submit" class="btn btn-dark btn-block mt-3" id="genReportDoctor">Generar Reporte</button>
+          <div class="d-flex flex-column" id="doctors"></div>
+        </div>
+
+        <div class="tab-pane fade" id="nurse1" role="tabpanel" aria-labelledby="nurse1-tab">
+                <button type="submit" class="btn btn-dark btn-block mt-3" id="genReportNurse">Generar Reporte</button>
+          <div class="d-flex flex-column" id="nurses"></div>
+        </div>
+
+
+        <div class="tab-pane fade" id="patient" role="tabpanel" aria-labelledby="patient-tab">
+
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <form>
+                  <div class="form-group">
+                    <label for="exampleFormControlFile1">Elegir Pacientes</label>
+                    <input type="file" class="form-control-file" id="patientsFileInput">
+                  </div>
+                </form>
+                <button type="button" class="btn btn-success" id="loadPatients">Cargar Pacientes</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="doctor" role="tabpanel" aria-labelledby="doctor-tab">
+
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <form>
+                    <div class="form-group">
+                      <label for="exampleFormControlFile1">Elegir Médicos</label>
+                      <input type="file" class="form-control-file" id="doctorsFileInput">
+                    </div>
+                  </form>
+                  <button type="button" class="btn btn-success" id="loadDoctors">Cargar Médicos</button>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="nurse" role="tabpanel" aria-labelledby="nurse-tab">
+
+  
+
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <form>
+                    <div class="form-group">
+                      <label for="exampleFormControlFile1">Elegir Enfermeras</label>
+                      <input type="file" class="form-control-file" id="nursesFileInput">
+                    </div>
+                  </form>
+                  <button type="button" class="btn btn-success" id="loadNurses">Cargar Enfermeras</button>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="medicament" role="tabpanel" aria-labelledby="medicament-tab">
+
+            <div class="container ">
+              <div class="row">
+                <div class="col">
+                  <form>
+                    <div class="form-group">
+                      <label for="exampleFormControlFile1">Elegr Medicamentos</label>
+                      <input type="file" class="form-control-file" id="medicinesFileInput">
+                    </div>
+                  </form>
+                  <button type="button" class="btn btn-success" id="loadMedicines">Cargar Medicamentos</button>
+                </div>
+              </div>
+            </div>
+
+        </div>
+
+
+
+      </div>
+      
+      <script>
+        function Logout(){
+          window.location="index.html";
+        }
+      </script>
+
+      <script>
+        //Geting URL params
+
+                        const queryStrings = window.location.search;
+                        const urlParams = new URLSearchParams(queryStrings);
+                        const firstName = urlParams.get("first_name");
+                        const lastName = urlParams.get("last_name");
+
+          //getting inputs
+                        let currentUser = document.getElementById("currentUser");
+                        currentUser.innerText = `Bienvenido ${firstName} ${lastName}!`;
+                        let medicines = document.getElementById("medicines");
+                        let medicinesFileInput = document.getElementById("medicinesFileInput");
+                        let genReportMedicine = document.getElementById("genReportMedicine");
+                        let loadMedicines = document.getElementById("loadMedicines");
+                       
+
+
+                        //getting medicines
+                        getMedicines();
+                        function getMedicines() {
+                                fetch("https://uhospitalipc1.herokuapp.com/medicine")
+                                        .then((response) => response.json())
+                                        .then((data) => {
+                                                medicines.innerHTML = "";
+                                                data.forEach((medicine) => {
+                                                        let card = document.createElement("div");
+                                                        card.className = "card m-2";
+                                                        card.id = medicine.name;
+                                                        let cardBody = document.createElement("div");
+                                                        cardBody.className = "card-body";
+                                                        //name
+                                                        let medicineName = document.createElement("h5");
+                                                        medicineName.className = "card-title";
+                                                        medicineName.innerText = medicine.name;
+                                                        //Quantity
+                                                        let medicineQuantity = document.createElement("p");
+                                                        medicineQuantity.className = "card-subtitle";
+                                                        medicineQuantity.innerText = "Cantidad: " + medicine.quantity;
+                                                        //Price
+                                                        let medicinePrice = document.createElement("p");
+                                                        medicinePrice.className = "card-subtitle";
+                                                        medicinePrice.innerText = "Precio: " + medicine.price;
+                                                        //Description
+                                                        let medicineDescription = document.createElement("p");
+                                                        medicineDescription.innerText = medicine.description;
+                                                        //Button_Edit
+                                                        let medicineEdit = document.createElement("BUTTON");
+                                                        medicineEdit.className = "btn btn-primary w-100";
+                                                        medicineEdit.innerText = "Editar Medicina";
+                                                        medicineEdit.addEventListener("click", (e) => {
+                                                                let params1 = `name=${medicine.name}`;
+                                                                params1 += `&quantity=${medicine.quantity}`;
+                                                                params1 += `&price=${medicine.price}`;
+                                                                params1 += `&description=${medicine.description}`;
+                                                                window.location = "modificar_medicinaAdmin.html?" + params1;
+                                                        });
+                                                        //Button Delete
+                                                        let medicineDelete = document.createElement("BUTTON");
+                                                        medicineDelete.className = "btn btn-danger w-100";
+                                                        medicineDelete.innerText = "Eliminar Medicina";
+                                                        medicineDelete.addEventListener("click", () => {
+                                                                fetch("https://uhospitalipc1.herokuapp.com/medicine?name=" + medicine.name, {
+                                                                        method: "DELETE",
+                                                                })
+                                                                        .then((response) => response.json())
+                                                                        .then((data) => getMedicines())
+                                                                        .catch((error) => console.error(error));
+                                                        });
+                                                        cardBody.appendChild(medicineName);
+                                                        cardBody.appendChild(medicineQuantity);
+                                                        cardBody.appendChild(medicinePrice);
+                                                        cardBody.appendChild(medicineDescription);
+                                                        cardBody.appendChild(medicineEdit)
+                                                        cardBody.appendChild(medicineDelete);
+                                                        card.appendChild(cardBody);
+                                                        medicines.appendChild(card);
+                                                });
+                                        })
+                                        .catch((error) => console.error(error));
+                        }
+ 
+                        //loading medicines
+                        loadMedicines.addEventListener("click", () => {
+                                let file = medicinesFileInput.files[0];
+                                let reader = new FileReader();
+                                reader.readAsText(file);
+                                reader.onload = () => {
+                                        let data = reader.result;
+                                        let medicines = data.split("\n");
+                                        medicines = medicines.splice(1, medicines.length - 1);
+                                        medicines.forEach((medicine) => {
+                                                if (medicine !== "") {
+                                                        let medicineData = medicine.split(",");
+                                                        const newMedicine = {
+                                                                name: medicineData[0],
+                                                                price: medicineData[1],
+                                                                description: medicineData[2],
+                                                                quantity: medicineData[3],
+                                                        };
+                                                        console.log(newMedicine);
+                                                        fetch("https://uhospitalipc1.herokuapp.com/medicine", {
+                                                                method: "POST",
+                                                                headers: {
+                                                                        "content-type": "application/json",
+                                                                },
+                                                                body: JSON.stringify(newMedicine),
+                                                        })
+                                                                .then((response) => response.json())
+                                                                .then((data) => getMedicines())
+                                                                .catch((error) => console.error(error));
+                                                }
+                                        });
+                                };
+                                reader.onerror = () => console.error(reader.error);
+                        });
+        //generate pdf report
+        genReportMedicine.addEventListener("click", () => {
+                                window.open("https://uhospitalipc1.herokuapp.com/reports/medicine");
+                        });
+ 
+                      
+      </script>
+
+      <script>
+
+                        let patients = document.getElementById("patients");
+                        let patientsFileInput = document.getElementById("patientsFileInput");
+                        let loadPatients = document.getElementById("loadPatients");
+                        let genReportPatient = document.getElementById("genReportPatient");
+                      
+
+
+                        //getting patients
+                        getPatients();
+                        function getPatients() {
+                                fetch("https://uhospitalipc1.herokuapp.com/patient")
+                                        .then((response) => response.json())
+                                        .then((data) => {
+                                                patients.innerHTML = "";
+                                                data.forEach((patient) => {
+                                                        let card = document.createElement("div");
+                                                        card.className = "card m-2";
+                                                        card.id = patient.nickname;
+                                                        let cardBody = document.createElement("div");
+                                                        cardBody.className = "card-body";
+                                                        //first_name
+                                                        let patientName = document.createElement("h5");
+                                                        patientName.className = "card-title";
+                                                        patientName.innerText = patient.first_name;
+                                                        //last_name
+                                                        let patientLastName = document.createElement("p");
+                                                        patientLastName.className = "card-subtitle";
+                                                        patientLastName.innerText = "Apellido: " + patient.last_name;
+                                                        //Date
+                                                        let patientDate = document.createElement("p");
+                                                        patientDate.innerText = patient.date;
+                                                        //gender
+                                                        let patientGender = document.createElement("p");
+                                                        patientGender.className = "card-subtitle";
+                                                        patientGender.innerText = "Género: " + patient.gender;
+                                                        //Nickname
+                                                        let patientNickname = document.createElement("p");
+                                                        patientNickname.className = "card-subtitle";
+                                                       patientNickname.innerText = "Nickname: " + patient.nickname;
+                                                       //password
+                                                       let patientPassword = document.createElement("p");
+                                                        patientPassword.className = "card-subtitle";
+                                                       patientPassword.innerText = "Password: " + patient.password;
+                                                       //Phone
+                                                       let patientPhone = document.createElement("p");
+                                                        patientPhone.className = "card-subtitle";
+                                                       patientPhone.innerText = "Phone: " + patient.phone; 
+                                                       //Phone
+                                                       let patientType = document.createElement("p");
+                                                       patientType.className = "card-subtitle";
+                                                       patientType.innerText = "type: "+patient.type;
+                                                       //Button_Edit
+                                                       let patientEdit = document.createElement("BUTTON");
+                                                        patientEdit.className = "btn btn-primary w-100";
+                                                        patientEdit.innerText = "Editar Paciente";
+                                                        patientEdit.addEventListener("click", (e) => {
+                                                                let params = `first_name=${patient.first_name}`;
+                                                                params += `&last_name=${patient.last_name}`;
+                                                                params += `&date=${patient.date}`;
+                                                                params += `&gender=${patient.gender}`;
+                                                                params += `&nickname=${patient.nickname}`;
+                                                                params += `&password=${patient.password}`;
+                                                                params += `&phone=${patient.phone}`;
+                                                                params += `&type=${patient.type}`;
+                                                                window.location = "modificar_pacienteAdmin.html?" + params;
+                                                        });                                                        
+                                                        //Button_delete
+                                                        let patientDelete = document.createElement("BUTTON");
+                                                        patientDelete.className = "btn btn-danger w-100";
+                                                        patientDelete.innerText = "Eliminar Paciente";
+                                                        patientDelete.addEventListener("click", () => {
+                                                                fetch("https://uhospitalipc1.herokuapp.com/patient?nickname=" + patient.nickname, {
+                                                                        method: "DELETE",
+                                                                })
+                                                                        .then((response) => response.json())
+                                                                        .then((data) => getPatients())
+                                                                        .catch((error) => console.error(error));
+                                                        });
+                                                        cardBody.appendChild(patientName);
+                                                        cardBody.appendChild(patientLastName);
+                                                        cardBody.appendChild(patientDate);
+                                                        cardBody.appendChild(patientGender);
+                                                        cardBody.appendChild(patientNickname);
+                                                        cardBody.appendChild(patientPassword);
+                                                        cardBody.appendChild(patientPhone);
+                                                        cardBody.appendChild(patientType);
+                                                        cardBody.appendChild(patientEdit);
+                                                        cardBody.appendChild(patientDelete);
+                                                        card.appendChild(cardBody);
+                                                        patients.appendChild(card);
+                                                });
+                                        })
+                                        .catch((error) => console.error(error));
+                        }
+ 
+                        //loading patients
+                        loadPatients.addEventListener("click", () => {
+                                let file = patientsFileInput.files[0];
+                                let reader = new FileReader();
+                                reader.readAsText(file);
+                                reader.onload = () => {
+                                        let data = reader.result;
+                                        let patients = data.split("\n");
+                                        patients = patients.splice(1, patients.length - 1);
+                                        patients.forEach((patient) => {
+                                                if (patient !== "") {
+                                                        let patientData = patient.split(",");
+                                                        const newPatient = {
+                                                                first_name: patientData[0],
+                                                                last_name: patientData[1],
+                                                                date: patientData[2],
+                                                                gender: patientData[3],
+                                                                nickname:patientData[4],
+                                                                password:patientData[5],
+                                                                phone:patientData[6],
+                                                                type: patientData[7]="patient"
+                                                        };
+                                                        console.log(newPatient);
+                                                        fetch("https://uhospitalipc1.herokuapp.com/patient", {
+                                                                method: "POST",
+                                                                headers: {
+                                                                        "content-type": "application/json",
+                                                                },
+                                                                body: JSON.stringify(newPatient),
+                                                        })
+                                                                .then((response) => response.json())
+                                                                .then((data) => getPatients())
+                                                                .catch((error) => console.error(error));
+                                                }
+                                        });
+                                };
+                                reader.onerror = () => console.error(reader.error);
+                        });
+ 
+        //generate pdf report
+        genReportPatient.addEventListener("click", () => {
+                                window.open("https://uhospitalipc1.herokuapp.com/reports/patient");
+                        });
+
+
+      </script>
+
+      <script>
+        //Carga de doctores
+                        let doctors = document.getElementById("doctors");
+                        let doctorsFileInput = document.getElementById("doctorsFileInput");
+                        let loadDoctors = document.getElementById("loadDoctors");
+                        let genReportDoctor = document.getElementById("genReportDoctor");
+                      
+
+
+                        //getting medicines
+                        getDoctors();
+                        function getDoctors() {
+                                fetch("https://uhospitalipc1.herokuapp.com/doctor")
+                                        .then((response) => response.json())
+                                        .then((data) => {
+                                                doctors.innerHTML = "";
+                                                data.forEach((doctor) => {
+                                                        let card = document.createElement("div");
+                                                        card.className = "card m-2";
+                                                        card.id = doctor.nickname;
+                                                        let cardBody = document.createElement("div");
+                                                        cardBody.className = "card-body";
+                                                        //first_name
+                                                        let doctorName = document.createElement("h5");
+                                                        doctorName.className = "card-title";
+                                                        doctorName.innerText = doctor.first_name;
+                                                        //last_name
+                                                        let doctorLastName = document.createElement("p");
+                                                        doctorLastName.className = "card-subtitle";
+                                                        doctorLastName.innerText = "Apellido: " + doctor.last_name;
+                                                        //Date
+                                                        let doctorDate = document.createElement("p");
+                                                        doctorDate.innerText = doctor.date;
+                                                        //gender
+                                                        let doctorGender = document.createElement("p");
+                                                        doctorGender.className = "card-subtitle";
+                                                        doctorGender.innerText = "Género: " + doctor.gender;
+                                                        //Nickname
+                                                        let doctorNickname = document.createElement("p");
+                                                        doctorNickname.className = "card-subtitle";
+                                                       doctorNickname.innerText = "Nickname: " + doctor.nickname;
+                                                       //password
+                                                       let doctorPassword = document.createElement("p");
+                                                        doctorPassword.className = "card-subtitle";
+                                                       doctorPassword.innerText = "Password: " + doctor.password;
+                                                       //speciality
+                                                       let doctorSpeciality = document.createElement("p");
+                                                        doctorSpeciality.className = "card-subtitle";
+                                                       doctorSpeciality.innerText = "Especialidad " + doctor.speciality;
+                                                       //Phone
+                                                       let doctorPhone = document.createElement("p");
+                                                        doctorPhone.className = "card-subtitle";
+                                                       doctorPhone.innerText = "Phone: " + doctor.phone; 
+                                                       //Type
+                                                       let doctorType = document.createElement("p");
+                                                       doctorType.className = "card-subtitle";
+                                                       doctorType.innerText = "type: "+ doctor.type;
+                                                       //Button_Edit
+                                                       let doctorEdit = document.createElement("BUTTON");
+                                                        doctorEdit.className = "btn btn-primary w-100";
+                                                        doctorEdit.innerText = "Editar Doctor";
+                                                        doctorEdit.addEventListener("click", (e) => {
+                                                                let params = `first_name=${doctor.first_name}`;
+                                                                params += `&last_name=${doctor.last_name}`;
+                                                                params += `&date=${doctor.date}`;
+                                                                params += `&gender=${doctor.gender}`;
+                                                                params += `&nickname=${doctor.nickname}`;
+                                                                params += `&password=${doctor.password}`;
+                                                                params += `&speciality=${doctor.speciality}`;
+                                                                params += `&phone=${doctor.phone}`;
+                                                                params += `&type=${doctor.type}`;
+                                                                window.location = "modificar_doctorAdmin.html?" + params;
+                                                        });                                                        
+                                                        //Button_delete
+                                                        let doctorDelete = document.createElement("BUTTON");
+                                                        doctorDelete.className = "btn btn-danger w-100";
+                                                        doctorDelete.innerText = "Eliminar Doctor";
+                                                        doctorDelete.addEventListener("click", () => {
+                                                                fetch("https://uhospitalipc1.herokuapp.com/doctor?nickname=" + doctor.nickname, {
+                                                                        method: "DELETE",
+                                                                })
+                                                                        .then((response) => response.json())
+                                                                        .then((data) => getDoctors())
+                                                                        .catch((error) => console.error(error));
+                                                        });
+                                                        cardBody.appendChild(doctorName);
+                                                        cardBody.appendChild(doctorLastName);
+                                                        cardBody.appendChild(doctorDate);
+                                                        cardBody.appendChild(doctorGender);
+                                                        cardBody.appendChild(doctorNickname);
+                                                        cardBody.appendChild(doctorPassword);
+                                                        cardBody.appendChild(doctorSpeciality);
+                                                        cardBody.appendChild(doctorPhone);
+                                                        cardBody.appendChild(doctorType);
+                                                        cardBody.appendChild(doctorEdit);
+                                                        cardBody.appendChild(doctorDelete);
+                                                        card.appendChild(cardBody);
+                                                        doctors.appendChild(card);
+                                                });
+                                        })
+                                        .catch((error) => console.error(error));
+                        }
+ 
+                        //loading Doctors
+                        loadDoctors.addEventListener("click", () => {
+                                let file = doctorsFileInput.files[0];
+                                let reader = new FileReader();
+                                reader.readAsText(file);
+                                reader.onload = () => {
+                                        let data = reader.result;
+                                        let doctors = data.split("\n");
+                                        doctors = doctors.splice(1, doctors.length - 1);
+                                        doctors.forEach((doctor) => {
+                                                if (doctor !== "") {
+                                                        let doctorData = doctor.split(",");
+                                                        const newDoctor = {
+                                                                first_name: doctorData[0],
+                                                                last_name: doctorData[1],
+                                                                date: doctorData[2],
+                                                                gender: doctorData[3],
+                                                                nickname:doctorData[4],
+                                                                password:doctorData[5],
+                                                                speciality: doctorData[6],
+                                                                phone: doctorData[7],
+                                                                type: doctorData[8]="doctor"
+                                                        };
+                                                        console.log(newDoctor);
+                                                        fetch("https://uhospitalipc1.herokuapp.com/doctor", {
+                                                                method: "POST",
+                                                                headers: {
+                                                                        "content-type": "application/json",
+                                                                },
+                                                                body: JSON.stringify(newDoctor),
+                                                        })
+                                                                .then((response) => response.json())
+                                                                .then((data) => getDoctors())
+                                                                .catch((error) => console.error(error));
+                                                }
+                                        });
+                                };
+                                reader.onerror = () => console.error(reader.error);
+                        });
+ 
+
+        
+        //generate pdf report
+        genReportDoctor.addEventListener("click", () => {
+                                window.open("https://uhospitalipc1.herokuapp.com/reports/doctor");
+                        });
+
+      </script>
+      <script>
+                //Carga de enfermeras
+                let nurses = document.getElementById("nurses");
+                let nursesFileInput = document.getElementById("nursesFileInput");
+                let loadNurses = document.getElementById("loadNurses");
+                let genReportNurse = document.getElementById("genReportNurse");
+                      
+
+
+                        //getting medicines
+                        getNurses();
+                        function getNurses() {
+                                fetch("https://uhospitalipc1.herokuapp.com/nurse")
+                                        .then((response) => response.json())
+                                        .then((data) => {
+                                                nurses.innerHTML = "";
+                                                data.forEach((nurse) => {
+                                                        let card = document.createElement("div");
+                                                        card.className = "card m-2";
+                                                        card.id = nurse.nickname;
+                                                        let cardBody = document.createElement("div");
+                                                        cardBody.className = "card-body";
+                                                        //first_name
+                                                        let nurseName = document.createElement("h5");
+                                                        nurseName.className = "card-title";
+                                                        nurseName.innerText = nurse.first_name;
+                                                        //last_name
+                                                        let nurseLastName = document.createElement("p");
+                                                        nurseLastName.className = "card-subtitle";
+                                                        nurseLastName.innerText = "Apellido: " + nurse.last_name;
+                                                        //Date
+                                                        let nurseDate = document.createElement("p");
+                                                        nurseDate.innerText = nurse.date;
+                                                        //gender
+                                                        let nurseGender = document.createElement("p");
+                                                        nurseGender.className = "card-subtitle";
+                                                        nurseGender.innerText = "Género: " + nurse.gender;
+                                                        //Nickname
+                                                        let nurseNickname = document.createElement("p");
+                                                        nurseNickname.className = "card-subtitle";
+                                                       nurseNickname.innerText = "Nickname: " + nurse.nickname;
+                                                       //password
+                                                       let nursePassword = document.createElement("p");
+                                                        nursePassword.className = "card-subtitle";
+                                                       nursePassword.innerText = "Password: " + nurse.password;
+                                                       //Phone
+                                                       let nursePhone = document.createElement("p");
+                                                        nursePhone.className = "card-subtitle";
+                                                       nursePhone.innerText = "Phone: " + nurse.phone; 
+                                                       //Type
+                                                       let nurseType = document.createElement("p");
+                                                       nurseType.className = "card-subtitle";
+                                                       nurseType.innerText = "type: "+ nurse.type; 
+                                                       //Button_Edit
+                                                       let nurseEdit = document.createElement("BUTTON");
+                                                        nurseEdit.className = "btn btn-primary w-100";
+                                                        nurseEdit.innerText = "Editar Enfermera";
+                                                        nurseEdit.addEventListener("click", (e) => {
+                                                                let params = `first_name=${nurse.first_name}`;
+                                                                params += `&last_name=${nurse.last_name}`;
+                                                                params += `&date=${nurse.date}`;
+                                                                params += `&gender=${nurse.gender}`;
+                                                                params += `&nickname=${nurse.nickname}`;
+                                                                params += `&password=${nurse.password}`;
+                                                                params += `&phone=${nurse.phone}`;
+                                                                params += `&type=${nurse.type}`;
+                                                                window.location = "modificar_enfermeraAdmin.html?" + params;
+                                                        });                                
+                                                                               
+                                                        //Button_delete
+                                                        let nurseDelete = document.createElement("BUTTON");
+                                                        nurseDelete.className = "btn btn-danger w-100";
+                                                        nurseDelete.innerText = "Eliminar Enfermera";
+                                                        nurseDelete.addEventListener("click", () => {
+                                                                fetch("https://uhospitalipc1.herokuapp.com/nurse?nickname=" + nurse.nickname, {
+                                                                        method: "DELETE",
+                                                                })
+                                                                        .then((response) => response.json())
+                                                                        .then((data) => getNurses())
+                                                                        .catch((error) => console.error(error));
+                                                        });
+                                                        
+                                                        cardBody.appendChild(nurseName);
+                                                        cardBody.appendChild(nurseLastName);
+                                                        cardBody.appendChild(nurseDate);
+                                                        cardBody.appendChild(nurseGender);
+                                                        cardBody.appendChild(nurseNickname);
+                                                        cardBody.appendChild(nursePassword);
+                                                        cardBody.appendChild(nursePhone);
+                                                        cardBody.appendChild(nurseType);
+                                                        cardBody.appendChild(nurseEdit);
+                                                        cardBody.appendChild(nurseDelete);
+                                                        card.appendChild(cardBody);
+                                                        nurses.appendChild(card);
+                                                });
+                                        })
+                                        .catch((error) => console.error(error));
+                        }
+ 
+                        //loading Nurses
+                        loadNurses.addEventListener("click", () => {
+                                let file = nursesFileInput.files[0];
+                                let reader = new FileReader();
+                                reader.readAsText(file);
+                                reader.onload = () => {
+                                        let data = reader.result;
+                                        let nurses = data.split("\n");
+                                        nurses = nurses.splice(1, nurses.length - 1);
+                                        nurses.forEach((nurse) => {
+                                                if (nurse !== "") {
+                                                        let nurseData = nurse.split(",");
+                                                        const newNurse = {
+                                                                first_name: nurseData[0],
+                                                                last_name: nurseData[1],
+                                                                date: nurseData[2],
+                                                                gender: nurseData[3],
+                                                                nickname:nurseData[4],
+                                                                password:nurseData[5],
+                                                                phone: nurseData[6],
+                                                                type: nurseData[7]="nurse"
+                                                        };
+                                                        console.log(newNurse);
+                                                        fetch("https://uhospitalipc1.herokuapp.com/nurse", {
+                                                                method: "POST",
+                                                                headers: {
+                                                                        "content-type": "application/json",
+                                                                },
+                                                                body: JSON.stringify(newNurse),
+                                                        })
+                                                                .then((response) => response.json())
+                                                                .then((data) => getNurses())
+                                                                .catch((error) => console.error(error));
+                                                }
+                                        });
+                                };
+                                reader.onerror = () => console.error(reader.error);
+                        });
+        //generate pdf report
+        genReportNurse.addEventListener("click", () => {
+                                window.open("https://uhospitalipc1.herokuapp.com/reports/nurse");
+                        });
+
+
+
+      </script>
+
+      <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+</body>
+</html>

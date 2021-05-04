@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Enfermera</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark mb-5">
+        <a class="navbar-brand" href="#">
+          <img
+            src="./assets/enfermera.png"
+            width="30"
+            height="30"
+            class="d-inline-block align-top"
+            alt=""
+          />
+          Enfermera
+        </a>
+        <div class="row">
+          <div class="col">
+            <p id="currentUser" class="text-uppercase text-white" style="width: 20rem;"></p>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-danger pull-left" onclick="Logout()">Cerrar Sesión</button>
+          </div>
+        </div>
+      </nav>
+    
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Citas Pendientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Citas Aceptadas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Generar Factura</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-contact1-tab" data-toggle="pill" href="#pills-contact1" role="tab" aria-controls="pills-contact1" aria-selected="false">Modificar Perfil</a>
+        </li>
+      </ul>
+      
+      <div class="tab-content" id="pills-tabContent1">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+          <table class="table" id="tabla">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Hora</th>
+                <th scope="col">Motivo</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>25/02/2021</td>
+                <td>12:50 PM</td>
+                <td>Dolor de Cabeza</td>
+                <td>
+                  <button type="button" class="btn btn-success">Aceptar</button>
+                    <button type="button" class="btn btn-danger">Rechazar</button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>15/04/2021</td>
+                <td>09:20 AM</td>
+                <td>Consulta Popular</td>
+                <td>
+                  <button type="button" class="btn btn-success">Aceptar</button>
+                    <button type="button" class="btn btn-danger">Rechazar</button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>25/04/2021</td>
+                <td>10:20 AM</td>
+                <td>Dolor de Espalda</td>
+                <td>
+                  <button type="button" class="btn btn-success">Aceptar</button>
+                    <button type="button" class="btn btn-danger">Rechazar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+          <table class="table" id="tabla">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Hora</th>
+                <th scope="col">Motivo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>25/02/2021</td>
+                <td>12:50 PM</td>
+                <td>Dolor de Cabeza</td>
+                
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>15/04/2021</td>
+                <td>09:20 AM</td>
+                <td>Consulta Popular</td>
+                
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>25/04/2021</td>
+                <td>10:20 AM</td>
+                <td>Dolor de Espalda</td>
+                
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+          <div class="container">
+            <div class="row">
+              <div clas= "col">
+
+                <form id="factura">
+                  <div class="form-group">
+
+                    <div>
+                    <label for="exampleInputEmail1">Fecha dd/mm/yyyy</label>
+                    <input type="text" class="form-control" id="date" aria-describedby="emailHelp" placeholder="Nombre del Paciente">
+                    </div>
+
+                    <label for="exampleInputEmail1">Paciente</label>
+                    <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Nombre del Paciente">
+                    
+                  </div>
+                  
+                  <label for="exampleInputEmail2">Doctor</label>
+                  <select class="custom-select custom-select-lg mb-3">
+
+                    <option selected="custom-select" id="doctor">Seleccione un Doctor</option>
+                    <option value="Dr Julio">Dr. Julio</option>
+                    <option value="Dr Juan">Dr. Juan</option>
+                    <option value="Dr Emilio">Dr. Manuel</option>
+                  </select>
+
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Precio Consulta</label>
+                    <input type="text" class="form-control" id="price" placeholder="Precio Consulta">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Costo Operación</label>
+                <input type="text" class="form-control" id="operacion" aria-describedby="emailHelp" placeholder="">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Costo Internado</label>
+                <input type="text" class="form-control" id="internado" aria-describedby="emailHelp" placeholder="">
+                  </div>
+                
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Total</label>
+                <input type="text" class="form-control" id="total" aria-describedby="emailHelp" placeholder="">
+                  </div>
+                
+              
+                <button type="submit" class="btn btn-primary btn-block mb-5" id="genFactura">Generar Factura</button>
+
+               
+                </div>
+
+              </form>
+                
+                
+              </div>
+            </div>
+
+            
+            
+          </div>
+
+              
+
+        <div class="tab-pane fade" id="pills-contact1" role="tabpanel" aria-labelledby="pills-contact1-tab">
+
+          <div class="container">
+            <div class="row">
+              <div clas= "col">
+
+                <form id="editForm">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Nombre</label>
+                    <input type="text" class="form-control" id="newName" aria-describedby="emailHelp" placeholder="Ingrese el Nuevo Nombre">
+                    
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Apellido</label>
+                    <input type="password" class="form-control" id="newLastName" placeholder="Ingrese el apellido">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Contraseña</label>
+                    <input type="password" class="form-control" id="newPassword" placeholder="Ingrese la nueva contraseña">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Fecha de nacimiento dd/mm/yyyy</label>
+                    <input type="text" class="form-control" id="newDate" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Teléfono</label>
+                    <input type="password" class="form-control" id="newPhone" placeholder="">
+                  </div>
+
+
+
+                  <button type="submit" class="btn btn-primary btn-block" id="editButton">Modificar</button>
+                </form>
+
+
+              </div>
+              
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <script>
+        function Logout(){
+          window.location ="index.html"
+        }
+
+      </script>
+      <script>
+        //Geting URL params
+
+        const queryStrings = window.location.search;
+                        const urlParams = new URLSearchParams(queryStrings);
+                        const firstName = urlParams.get("first_name");
+                        const lastName = urlParams.get("last_name");
+                        const genderOld = urlParams.get("gender");
+                        const nicknameOld = urlParams.get("nickname");
+                        const typeOld = urlParams.get("type");
+
+          //getting inputs
+                        let currentUser = document.getElementById("currentUser");
+                        currentUser.innerText = `Bienvenida Enfermera: ${firstName} ${lastName}!`;
+
+          //Metodo PUT
+    let editForm = document.getElementById("editForm");
+    let newName = document.getElementById("newName");
+    let newLastName=document.getElementById("newLastName");
+	  let newPassword = document.getElementById("newPassword");
+    let newDate= document.getElementById("newDate");
+    let newSpeciality= document.getElementById("newSpeciality")
+    let newPhone =document.getElementById("newPhone");
+    let newGender=document.getElementById("newGender");
+	  let editButton = document.getElementById("editButton");
+    
+    editForm.addEventListener("submit", (e) => {
+	  e.preventDefault();
+	});
+
+    
+    editButton.addEventListener("click",(e)=>{
+        const modifyNurse={
+            first_name: newName.value,
+            last_name: newLastName.value,
+            date: newDate.value,
+            gender: genderOld,
+            nickname: nicknameOld,
+            password: newPassword.value,
+            phone: newPhone.value,
+            type: typeOld
+    };
+        console.log(modifyNurse);
+
+        fetch("https://uhospitalipc1.herokuapp.com/nurse", {
+            method: "PUT",
+            headers: {
+            "content-type": "application/json",
+            },
+            body: JSON.stringify(modifyNurse),        })
+            .then((response) => response.json())
+            .then((data) => {
+            if (data.message) {
+            alert("Modificado Exitosamente, inicie sesion de nuevo por favor");
+            
+            window.location = "login.html";
+            } else {
+            console.error(data);
+            alert("Nickname Repetido");                                    }
+        })
+
+        .catch((error)=> console.error(error));
+
+    });
+    
+    </script>
+    <script>
+    let facturaForm = document.getElementById("factura");
+    let name = document.getElementById("name");
+    let date=document.getElementById("date");
+	  let doctor = document.getElementById("doctor");
+    let price = document.getElementById("price");
+    let operacion= document.getElementById("operacion")
+    let internado=document.getElementById("internado");
+    let total=document.getElementById("total");
+	  let genFactura = document.getElementById("genFactura"); 
+
+    //Post
+    facturaForm.addEventListener("submit", (e) => {
+                                e.preventDefault();
+    });
+
+    genFactura.addEventListener("click", (e) => {
+                                const newInvoice = {
+                                        name: name.value,
+                                        date: date.value,
+                                        doctor: doctor.value,
+                                        price: price.value,
+                                        operacion: operacion.value,
+                                        internado: internado.value,
+                                        total: total.value
+                                };
+                                console.log(newInvoice);
+                                fetch("https://uhospitalipc1.herokuapp.com/invoice", {
+                                        method: "POST",
+                                        headers: {
+                                                "content-type": "application/json",
+                                        },
+                                        body: JSON.stringify(newInvoice),
+                                })
+                                        .then((response) => response.json())
+                                        .then((data) => {
+                                                if (data.message) {
+                                                        console.error(data);
+														                    alert("Error en la factura");
+														
+                                                } else {
+                                                  window.open("https://uhospitalipc1.herokuapp.com/reports/invoices");
+                                                }
+                                        })
+                                        .catch((error) => console.error(error));
+                        });
+
+
+    </script>
+
+
+<script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+   <!--Made with love by Mutiullah Samim -->
+   
+	<!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="styleLogin.css">
+
+</head>
+<body>
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Login</h3>
+
+			</div>
+			<div class="card-body">
+				<form id="loginForm">
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" id="nickname" class="form-control" placeholder="nickname">
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" id="password" class="form-control" placeholder="password">
+					</div>
+
+					<div class="form-group">
+						<input type="submit" id="login" value="Login" class="btn float-right login_btn">
+					</div>
+				</form>
+			</div>
+			<div class="card-footer">
+				<div class="row">
+					<div class="col">
+						<div class="form-group">
+							<input type="submit" id="singup" value="Regresar" class="btn float-left login_btn" onclick="backIndex()">
+						</div>
+					</div>
+						</div>
+					<div class="row mt-3">
+						<div class="col">
+							<div class="col">
+								<div class="d-flex justify-content-center links">
+									No tienes una cuenta?<a href="singup.html">Regístrate</a>
+						</div>
+					</div>
+					</div>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	let loginForm = document.getElementById("loginForm");
+	let nicknameInput = document.getElementById("nickname");
+	let passwordInput = document.getElementById("password");
+	let loginButton = document.getElementById("login");
+
+	loginForm.addEventListener("submit", (e) => {
+	  e.preventDefault();
+	});
+
+	loginButton.addEventListener("click", (e) => {
+	  console.log(nicknameInput.value, passwordInput.value);
+	  fetch("https://uhospitalipc1.herokuapp.com/login", {
+		method: "POST",
+		headers: {
+		  "content-type": "application/json",
+		},
+		body: JSON.stringify({
+		  nickname: nicknameInput.value,
+		  password: passwordInput.value,
+		}),
+	  })
+		.then((response) => response.json())
+		.then((data) => {
+		  if (data.message) {
+			console.error(data.message);
+			alert("Credenciales Incorrectas, Intente de Nuevo :(");
+		  } else {
+			if(data.type ==="patient"){
+				let params = `first_name=${data.first_name}`;
+                params += `&last_name=${data.last_name}`;
+                params += `&date=${data.date}`;
+                params += `&gender=${data.gender}`;
+                params += `&nickname=${data.nickname}`;
+                params += `&password=${data.password}`;
+                params += `&phone=${data.phone}`;
+				params += `&type=${data.type}`
+                window.location = "patient.html?" + params;				
+			}
+			else if (data.type === "doctor"){
+				let params = `first_name=${data.first_name}`;
+                params += `&last_name=${data.last_name}`;
+                params += `&date=${data.date}`;
+                params += `&gender=${data.gender}`;
+                params += `&nickname=${data.nickname}`;
+                params += `&password=${data.password}`;
+				params += `&phone=${data.speciality}`;
+                params += `&phone=${data.phone}`;
+				params += `&type=${data.type}`
+                window.location = "doctor.html?" + params;
+			}
+			else if (data.type === "nurse"){
+				let params = `first_name=${data.first_name}`;
+                params += `&last_name=${data.last_name}`;
+                params += `&date=${data.date}`;
+                params += `&gender=${data.gender}`;
+                params += `&nickname=${data.nickname}`;
+                params += `&password=${data.password}`;
+                params += `&phone=${data.phone}`;
+				params += `&type=${data.type}`
+                window.location = "nurse.html?" + params;
+			}
+			else if(data.type ==="admin"){
+			  window.location = "admin.html?"+`&first_name=${data.first_name}`+`&last_name=${data.last_name}`;
+			}
+		  }
+		})
+		.catch((error) => console.error(error));
+	});
+  </script>
+
+<script>
+	function backIndex(){
+		window.location="index.html";
+	}
+</script>
+<script
+src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+crossorigin="anonymous"
+></script>
+<script
+src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+crossorigin="anonymous"
+></script>
+
+
+
+</body>
+</html>

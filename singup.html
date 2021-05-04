@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registro</title>
+   <!--Made with love by Mutiullah Samim -->
+   
+	<!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="styleSingup.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card mt-5">
+			<div class="card-header">
+				<h3>Registrarse</h3>
+
+			</div>
+			<div class="card-body mt">
+				<form id="singupForm">
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" id="firstName" class="form-control" placeholder="nombre">
+					</div>
+					
+
+                    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" id="lastName" class="form-control" placeholder="apellido">
+					</div>
+
+
+
+
+                    <div>
+                        <label for="exampleFormControlInput1" class="letra">Fecha de nacimiento (dd/mm/yyyy)</label>
+                      
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" id="date" class="form-control" placeholder="">
+						</div>
+
+                    </div>
+
+                    <div class="input-group mt-3">
+                        <select class="custom-select" id="gender">
+                          <option selected>Seleccionar sexo</option>
+                          <option value="M">M</option>
+                          <option value="F">F</option>
+                        </select>
+                        
+                      </div>
+					
+					  <div class="input-group form-group mt-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" id="nickname" class="form-control" placeholder="nickname">
+					</div>
+
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" id="password" class="form-control" placeholder="password">
+					</div>
+
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" id="phone" class="form-control" placeholder="Número de teléfono">
+					</div>
+
+
+
+                      
+
+
+					<div class="form-group mt-2">
+						<input type="submit" id="singup" value="Registrar" class="btn float-right login_btn">
+					</div>
+
+
+
+
+                    
+				</form>
+			</div>
+			<div class="card-footer">
+				<div class="row">
+					<div class="col">
+						<div class="form-group">
+							<input type="submit" id="singup" value="Regresar" class="btn float-left login_btn" onclick="backIndex()">
+						</div>
+					</div>
+						</div>
+					<div class="row mt-3">
+						<div class="col">
+							<div class="col">
+								<div class="d-flex justify-content-center links">
+									No tienes una cuenta?<a href="singup.html">Regístrate</a>
+						</div>
+					</div>
+					</div>
+				<div class="d-flex justify-content-center links">
+					Ya tienes una cuenta?<a href="login.html">Inicia Sesión</a>
+				</div>
+				
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<script>
+	let singupForm = document.getElementById("singupForm");
+	let firstName = document.getElementById("firstName");
+	let lastName = document.getElementById("lastName");
+	let date = document.getElementById("date");
+	let gender = document.getElementById("gender");
+	let nickname = document.getElementById("nickname");
+	let password = document.getElementById("password");
+	let phone = document.getElementById("phone");
+	let singupButton = document.getElementById("singup");
+
+	singupForm.addEventListener("submit", (e) => {
+                                e.preventDefault();
+                        });
+                        singupButton.addEventListener("click", (e) => {
+                                const newUser = {
+                                        first_name: firstName.value,
+                                        last_name: lastName.value,
+                                        date: date.value,
+                                        gender: gender.value,
+                                        nickname: nickname.value,
+                                        password: password.value,
+                                        phone: phone.value,
+										type: "patient"
+                                };
+                                console.log(newUser);
+                                fetch("https://uhospitalipc1.herokuapp.com/patient", {
+                                        method: "POST",
+                                        headers: {
+                                                "content-type": "application/json",
+                                        },
+                                        body: JSON.stringify(newUser),
+                                })
+                                        .then((response) => response.json())
+                                        .then((data) => {
+                                                if (data.message) {
+                                                        console.error(data);
+														alert("El usuario ya existe por favor inicie sesión");
+														window.location="login.html";
+                                                } else {
+                                                        let params = `first_name=${data.first_name}`;
+                                                        params += `&last_name=${data.last_name}`;
+                                                        params += `&date=${data.date}`;
+                                                        params += `&gender=${data.gender}`;
+                                                        params += `&nickname=${data.nickname}`;
+                                                        params += `&password=${data.password}`;
+                                                        params += `&phone=${data.phone}`;
+														params += `&type=${data.type}`
+                                                        window.location = "patient.html?" + params;
+                                                }
+                                        })
+                                        .catch((error) => console.error(error));
+                        });
+  </script>
+
+<script>
+	function backIndex(){
+		window.location="index.html";
+	}
+</script>
+
+<script
+src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+crossorigin="anonymous"
+></script>
+<script
+src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+crossorigin="anonymous"
+></script>
+
+
+
+</body>
+</html>

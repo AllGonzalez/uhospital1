@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Patient</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"/>
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark mb-5">
+          <a class="navbar-brand" href="#">
+            <img
+              src="./assets/paciente.png"
+              width="30"
+              height="30"
+              class="d-inline-block align-top"
+              alt=""/>
+            Paciente </a>
+
+            <div class="row">
+              <div class="col">
+                <p id="currentUser" class="text-uppercase text-white" style="width: 20rem;"></p>
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-danger pull-left" onclick="Logout()">Cerrar Sesión</button>
+              </div>
+            </div>
+  
+      </nav>
+
+      <div class="row ">
+        <div class="col-3">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Solicitar Cita</a>
+            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Estado de Citas</a>
+            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Tienda de Medicamentos</a>
+            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Configuración de Perfil</a>
+            <a class="nav-link" id="v-pills-pedido-tab" data-toggle="pill" href="#v-pills-pedido" role="tab" aria-controls="v-pills-pedido" aria-selected="false">Mi pedido</a>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1">Fecha</label>
+                      
+                      <input id="datepicker" width="276" />
+                      <script>
+                          $('#datepicker').datepicker({
+                              uiLibrary: 'bootstrap4'
+                          });
+                      </script>
+    
+                    </div>
+    
+                    <label for="grupo1">Hora</label>
+                    <input id="timepicker" width="276" />
+                    <script>
+                        $('#timepicker').timepicker();
+                    </script>
+                    
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Motivo</label>
+                      <textarea class="form-control" id="description" rows="3" placeholder="Motivo de cita"></textarea>
+                    </div>
+                  </form>
+                  <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-success btn-lg">Generar Cita</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora</th>
+                    <th scope="col">Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>25/04/2021</td>
+                    <td>11:25</td>
+                    <td>Aceptada</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>14/05/2021</td>
+                    <td>14:50</td>
+                    <td>Pendiente</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>25/08/2021</td>
+                    <td>15:20</td>
+                    <td>Finalizado</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+
+
+            </div>
+            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+
+              <h2 class="text-center">Medicina</h2>
+
+              <div class="container m-5">
+                <div class="row ">
+                  <div class="col"><h3>Panadol</h3>
+                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab vel enim ipsum eius deleniti impedit eaque neque, aperiam molestiae laudantium ipsam optio, voluptate vitae sapiente amet. Aliquam, quo eligendi. Illo?</p>
+                  <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-success btn-block">Q.10.00</button>
+                  </div>
+                  </div>
+                  <div class="col"><h3>Omeprazol</h3>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab vel enim ipsum eius deleniti impedit eaque neque, aperiam molestiae laudantium ipsam optio, voluptate vitae sapiente amet. Aliquam, quo eligendi. Illo?</p>
+
+                    <div class="d-flex justify-content-center">
+                      <button type="button" class="btn btn-success btn-block">Q.5.00</button>
+                  </div>
+                  </div>
+                  <div class="col"><h3>Parecetamol</h3>
+                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab vel enim ipsum eius deleniti impedit eaque neque, aperiam molestiae laudantium ipsam optio, voluptate vitae sapiente amet. Aliquam, quo eligendi. Illo?
+                  </p>
+                  <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-success btn-block">Q.12.00</button>
+                </div>
+                  </div>
+                  </div>
+                  
+
+                  <div class="row">
+                    <div class="col"> 
+                      <h3>Ramipril</h3>
+                      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab vel enim ipsum eius deleniti impedit eaque neque, aperiam molestiae laudantium ipsam optio, voluptate vitae sapiente amet. Aliquam, quo eligendi. Illo?</p>
+                      <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-success btn-block">Q.7.00</button>
+                    </div>
+                    </div>
+                    <div class="col">
+                      <h3>Aspirina</h3>
+                      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab vel enim ipsum eius deleniti impedit eaque neque, aperiam molestiae laudantium ipsam optio, voluptate vitae sapiente amet. Aliquam, quo eligendi. Illo?</p>
+                      <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-success btn-block">Q.15.00</button>
+                    </div>
+                    </div>
+                    <div class="col">
+                      <h3>Salbutamol</h3>
+                      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab vel enim ipsum eius deleniti impedit eaque neque, aperiam molestiae laudantium ipsam optio, voluptate vitae sapiente amet. Aliquam, quo eligendi. Illo?</p>
+                      <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-success btn-block">Q.8.00</button>
+                    </div>
+                    </div>
+  
+                  </div>
+
+              </div>
+
+
+
+              
+            </div>
+
+            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+
+              <div class="container">
+                <div class="row">
+                  <div clas= "col">
+
+                    <form id="editForm">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Nombre</label>
+                        <input type="text" class="form-control" id="newName" aria-describedby="emailHelp" placeholder="Ingrese el Nuevo Nombre">
+                        
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Apellido</label>
+                        <input type="text" class="form-control" id="newLastName" placeholder="Ingrese el apellido">
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Contraseña</label>
+                        <input type="password" class="form-control" id="newPassword" placeholder="Ingrese la nueva contraseña">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Teléfono</label>
+                       <input type="text" class="form-control" id="newPhone" placeholder="">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Fecha de Nacimiento dd/mm/yyyy</label>
+                       <input type="text" class="form-control" id="newDate" placeholder="">
+                      </div>
+                      <div class="input-group mt-4">
+                        <select class="custom-select" id="newGender">
+                          <option selected>Seleccionar sexo</option>
+                          <option value="M">M</option>
+                          <option value="F">F</option>
+                        </select>
+                        </div>
+                      <button type="submit" class="btn btn-primary btn-block mt-3" id="editButton">Modificar</button>
+                    </form>
+
+
+                  </div>
+                  
+                </div>
+              </div>
+              
+
+            </div>
+
+            <div class="tab-pane fade" id="v-pills-pedido" role="tabpanel" aria-labelledby="v-pills-pedido-tab">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col">Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Lanzoprasol</th>
+                    <td>Q.15.00</td>
+                    <td>5</td>
+                    <td>Q45.00</td>
+                    <td>
+                      <button type="button" class="btn btn-success">+</button>
+                      <button type="button" class="btn btn-danger">-</button>
+                      
+                      <!-- Example split danger button -->
+                      <div class="btn-group">
+                       <button type="button" class="btn btn-info">...</button>
+                        <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">Ver</a>
+                     <a class="dropdown-item" href="#">Eliminar</a>
+                  </div>  
+                    </div>
+
+                    </td>
+                  </tr>
+
+                  <tr>
+
+                    <th scope="row">Aspirina</th>
+                    <td>Q.2.00</td>
+                    <td>10</td>
+                    <td>Q20.00</td>
+                    <td>
+                      <button type="button" class="btn btn-success">+</button>
+                      <button type="button" class="btn btn-danger">-</button>
+                      
+                      <!-- Example split danger button -->
+                      <div class="btn-group">
+                       <button type="button" class="btn btn-info">...</button>
+                        <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">Ver</a>
+                     <a class="dropdown-item" href="#">Eliminar</a>
+                  </div>  
+                    </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">Ibuprofeno</th>
+                    <td>Q.6.00</td>
+                    <td>4</td>
+                    <td>Q24.00</td>
+                    <td>
+                      <button type="button" class="btn btn-success">+</button>
+                      <button type="button" class="btn btn-danger">-</button>
+                      
+                      <!-- Example split danger button -->
+                      <div class="btn-group">
+                       <button type="button" class="btn btn-info">...</button>
+                        <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">Ver</a>
+                     <a class="dropdown-item" href="#">Eliminar</a>
+                  </div>  
+                    </div>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+
+
+
+      <script>
+        function Logout(){
+          window.location = "index.html"
+        }
+      </script>
+
+    <script>
+        //Geting URL params
+
+                        const queryStrings = window.location.search;
+                        const urlParams = new URLSearchParams(queryStrings);
+                        const firstName = urlParams.get("first_name");
+                        const lastName = urlParams.get("last_name");
+                        const nicknameOld= urlParams.get("nickname");
+                        const typeOld = urlParams.get("type");
+
+          //getting inputs
+                        let currentUser = document.getElementById("currentUser");
+                        currentUser.innerText = `Bienvenido(a) Paciente: ${firstName} ${lastName}!`;
+        //Metodo PUT
+        let editForm = document.getElementById("editForm");
+    let newName = document.getElementById("newName");
+    let newLastName=document.getElementById("newLastName");
+	let newPassword = document.getElementById("newPassword");
+    let newDate= document.getElementById("newDate");
+    let newSpeciality= document.getElementById("newSpeciality")
+    let newPhone =document.getElementById("newPhone");
+    let newGender=document.getElementById("newGender");
+	let editButton = document.getElementById("editButton");
+    
+    editForm.addEventListener("submit", (e) => {
+	  e.preventDefault();
+	});
+
+    
+    editButton.addEventListener("click",(e)=>{
+        const modifyPatient={
+            first_name: newName.value,
+            last_name: newLastName.value,
+            date: newDate.value,
+            gender: newGender.value,
+            nickname: nicknameOld,
+            password: newPassword.value,
+            phone: newPhone.value,
+            type: typeOld
+    };
+        console.log(modifyPatient);
+
+        fetch("https://uhospitalipc1.herokuapp.com/patient", {
+            method: "PUT",
+            headers: {
+            "content-type": "application/json",
+            },
+            body: JSON.stringify(modifyPatient),        })
+            .then((response) => response.json())
+            .then((data) => {
+            if (data.message) {
+            alert("Modificado Exitosamente, inicie sesion de nuevo por favor");
+            
+            window.location = "login.html";
+            } else {
+            console.error(data);
+            alert("Nickname Repetido");                                    }
+        })
+
+        .catch((error)=> console.error(error));
+
+    });
+    </script>
+
+    <script>
+
+    </script>
+      <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+</body>
+</html>
